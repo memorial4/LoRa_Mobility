@@ -17,6 +17,8 @@
 #include "LoRaPhy/LoRaMedium.h"
 #include "LoRaPhy/LoRaPhyPreamble_m.h"
 #include "inet/physicallayer/wireless/common/contract/packetlevel/SignalTag_m.h"
+//#include "inet/physicallayer/wireless/common/medium/RadioMedium.h"
+
 
 
 namespace flora {
@@ -41,6 +43,12 @@ void LoRaGWRadio::finish()
 {
     FlatRadioBase::finish();
     recordScalar("DER - Data Extraction Rate", double(LoRaGWRadioReceptionFinishedCorrect_counter)/LoRaGWRadioReceptionStarted_counter);
+    EV_INFO << "Ropalo: Successfull transmissions number is: " << LoRaGWRadioReceptionFinishedCorrect_counter << endl; ////////////////////////////// edwwwww
+    //EV_INFO << "Ropalo1 unsuccessfull transmissions no is: " << failedtrans << endl;
+    //recordScalar("transmission count", transmissionCount);
+
+    Globals::Correct_counter += LoRaGWRadioReceptionFinishedCorrect_counter;   /////////  added this 23/10/2022
+
 }
 
 void LoRaGWRadio::handleSelfMessage(cMessage *message)

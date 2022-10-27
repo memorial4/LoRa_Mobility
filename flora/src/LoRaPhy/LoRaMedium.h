@@ -38,13 +38,27 @@ class LoRaMedium : public RadioMedium
 
 protected:
     virtual bool matchesMacAddressFilter(const IRadio *radio, const Packet *packet) const override;
+    long succsesstrans;
+    long failedtrans;
         //@}
     public:
       LoRaMedium();
       virtual ~LoRaMedium();
+
+      void finish();   /////////////////////////        I addded this 23/10/2022
+
       //virtual const IReceptionDecision *getReceptionDecision(const IRadio *receiver, const IListening *listening, const ITransmission *transmission, IRadioSignal::SignalPart part) const override;
       virtual const IReceptionResult *getReceptionResult(const IRadio *receiver, const IListening *listening, const ITransmission *transmission) const override;
       virtual void addTransmission(const IRadio *transmitter, const ITransmission *transmission);
 };
+
+/////////////////          I added this 23/10/2022      //////////////////
+
+class Globals {
+public:
+   static int totaltransmissionCounter;
+   static int Correct_counter;
+};
+
 }
 #endif /* LORAPHY_LORAMEDIUM_H_ */

@@ -29,6 +29,9 @@
 #include "inet/physicallayer/wireless/common/medium/RadioMedium.h"
 #include "inet/physicallayer/wireless/common/contract/packetlevel/SignalTag_m.h"
 #include "inet/physicallayer/wireless/common/contract/packetlevel/IErrorModel.h"
+#include "fstream"
+
+using namespace std;
 
 namespace flora {
 
@@ -36,6 +39,8 @@ Define_Module(LoRaMedium);
 
 LoRaMedium::LoRaMedium() : RadioMedium()
 {
+    succsesstrans = 0;
+    failedtrans = 0;
 }
 
 LoRaMedium::~LoRaMedium()
@@ -119,5 +124,18 @@ void LoRaMedium::addTransmission(const IRadio *transmitterRadio, const ITransmis
         scheduleAt(communicationCache->getCachedInterferenceEndTime(transmission), removeNonInterferingTransmissionsTimer);
     emit(signalAddedSignal, check_and_cast<const cObject *>(transmission));
 }
+///////////////////// I added this 23/10/2022////////////////////////////////////////
+void LoRaMedium::finish(){
+    RadioMedium::finish();
+    double succesfultranspercentage = 100 * (double) Globals::Correct_counter / (double) transmissionCount;
+    EV_INFO << "Ropalo1 Percentage of successful transmissions no is: " << succesfultranspercentage << " %" <<endl;
 
+    ofstream myfile;
+    myfile.open ("../results/mystats.txt");
+    myfile << "Total Transmissions: " << transmissionCount;
+    myfile.close();
+}
+int Globals::Correct_counter= 0;
+int Globals::totaltransmissionCounter = 0;
+//////////////////////////////////////////////////////////////////////////////////
 }
