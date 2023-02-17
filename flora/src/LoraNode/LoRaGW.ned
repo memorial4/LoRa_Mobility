@@ -15,11 +15,22 @@
 
 package flora.LoraNode;
 
+package inet.examples.mobility; // change it
+import inet.common.scenario.ScenarioManager;
+//import inet.mobility.group.MoBanCoordinator;
+//import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
+
+
 import inet.node.contract.INetworkNode;
-//import inet.mobility.single.LinearMobility; //////////////////////////////////////////////allagi edw
+////////////////////////////////////////////// Change here /////////////
+//import inet.mobility.single.LinearMobility; 
 import inet.mobility.single.CircleMobility;
+//import inet.mobility.single.AttachedMobility;
+//import inet.mobility.single.TractorMobility;
 //import inet.mobility.single.RandomWaypointMobility;
-//import inet.mobility.static.StationaryMobility;
+//import inet.mobility.single.MassMobility; 
+//import inet.mobility.static.StationaryMobility; 
+//////////////////////////////////////////// ------------  //////////////
 import inet.networklayer.common.InterfaceTable;
 import inet.networklayer.contract.INetworkLayer;
 import inet.linklayer.loopback.LoopbackInterface;
@@ -89,7 +100,7 @@ module LoRaGW like INetworkNode
         interfaceTable: InterfaceTable {
             @display("p=135.36,69.936005");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////// allagi edw
+        //////////////////////////////////////////////////////////////////////////////////////////////// change here
         //mobility: StationaryMobility {
           //  @display("p=135.36,199.656");
         //}
@@ -99,9 +110,23 @@ module LoRaGW like INetworkNode
         mobility: CircleMobility {
             @display("p=200,200;r=,,#707070");
         }
+        //mobility: TractorMobility {
+          //  @display("p=100,100;r=,,#707070");
+        //}
         //mobility: RandomWaypointMobility {
           //  @display("p=200,200;r=,,#707070");
         //}
+        //scenarioManager: ScenarioManager {
+          //  parameters:
+            //    @display("p=100,100;is=s");
+        //}
+        //mobility: MassMobility {
+          //  @display("p=100,100;r=,,#707070");
+        //}
+        //coordinator[loRaGW]: MoBanCoordinator {
+          //  parameters:
+            //    @display("i=block/wheelbarrow;p=100,100;is=s");
+        //}        
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         LoRaGWNic: LoRaGWNic {
             @display("p=626.04004,94.75201");
